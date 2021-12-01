@@ -2,7 +2,8 @@ import express from "express" ;
 import dotenv from "dotenv" ; 
 import morgan from "morgan" ;
 import mongoose from "mongoose" ; 
-import routerCategory  from "./routes/category" 
+import routerCategory  from "./routes/category"  ;
+import routerProduct from "./routes/products"
 import cors from "cors"
 
 const app = express() ;  
@@ -35,7 +36,7 @@ mongoose.connect(process.env.CONNECTION_STRING,{
 //     res.send("hello")
 // })  
 app.use(`${api}` , routerCategory)
-
+app.use( `${api}`, routerProduct)
 
 app.listen(port ,()=>{ 
     console.log(`Le serveur est lancé sur le port ${port}`)

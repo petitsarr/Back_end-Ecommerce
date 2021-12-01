@@ -33,6 +33,7 @@ const productSchema = new mongoose.Schema({
     // l'id sera connecté au categorie Schema .
     category : {
       type : mongoose.Schema.Types.ObjectId ,
+    //   ceci est référencé au Schema que jai créé 
       ref : "Category"  ,
       required : true ,
      

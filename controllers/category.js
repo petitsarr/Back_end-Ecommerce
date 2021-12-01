@@ -6,7 +6,7 @@ import  categorySchema from "../models/category"  ;
 //  Ajouter un category   
 const addCategory = async (req ,res) => { 
     try {  
-        const {name ,icon ,color}  = req.body  ;
+        const {name ,icon ,color}  = req.body  ;  
         
         let category = new Category ({
             name ,
