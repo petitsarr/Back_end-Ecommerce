@@ -1,10 +1,13 @@
 import express from "express" ;
 import dotenv from "dotenv" ; 
-import morgan from "morgan" ;
+import morgan from "morgan" ; 
 import mongoose from "mongoose" ; 
 import routerCategory  from "./routes/category"  ;
-import routerProduct from "./routes/products"
-import cors from "cors"
+import routerProduct from "./routes/products" ;
+import  userRouter from "./routes/user" 
+import Auth from "./helpers/jwt"
+import cors from "cors" 
+import Error from "./helpers/Error"
 
 const app = express() ;  
 
@@ -15,12 +18,12 @@ const api = process.env.API_URl  ;
 
 // Middleware  
 app.use(cors()) 
-
-app.use(express.urlencoded({
-    extended : true
-})) 
+app.use(Auth()) 
+app.use(Error)
 app.use(express.json()) 
-
+app.use(express.urlencoded({
+    extended:true
+})) 
 // morgan pour enrigistrer les requetes http pour node js (utilisation d'une chaine de format prédéfinie)
 app.use(morgan('tiny')) 
 
@@ -37,6 +40,8 @@ mongoose.connect(process.env.CONNECTION_STRING,{
 // })  
 app.use(`${api}` , routerCategory)
 app.use( `${api}`, routerProduct)
+app.use( `${api}`, userRouter) 
+
 
 app.listen(port ,()=>{ 
     console.log(`Le serveur est lancé sur le port ${port}`)
