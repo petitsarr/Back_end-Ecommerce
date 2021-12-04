@@ -19,9 +19,23 @@ const Auth = () => {
     // Mon url api 
     const api = process.env.API_URL 
 
+// req = la demande , payload = contient ce qui se trouve à l'interieur du jeton exple : le champ isAdmin dans mon token 
+ const  isRevoked = async ( req ,payload , done) => { 
+    //  si luser n'es pas admin 
+     if(!payload.isAdmin) {
+        done(null , true)
+     } 
+     
+     else {
+         done() ;
+     }
+ }
+ 
     return jwt({
         secret ,
-        algorithms : ["HS256"]
+        algorithms : ["HS256"]  ,
+        // ceci est une fonction qui permet specifier si user est admin ou non . 
+        isRevoked  : isRevoked
     }).unless({
         path : [ 
         {
