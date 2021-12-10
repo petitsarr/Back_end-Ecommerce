@@ -5,7 +5,7 @@ import jwt from "express-jwt" ;
 // l'user peut s'inscrire sans blocage 
 // Se connecter sans blocage 
 // On peut voir la liste des produits sans pour autant s'authenfier .
-// Lobjet est de recevoir que des demandes mais nous autorisons pas  la publicaton .   
+// L'objet est de recevoir que des demandes mais nous autorisons pas  la publicaton .   
 
 /*
 Utilisation des expressions réguliéres qui me donne 
@@ -19,17 +19,7 @@ const Auth = () => {
     // Mon url api 
     const api = process.env.API_URL 
 
-// req = la demande , payload = contient ce qui se trouve à l'interieur du jeton exple : le champ isAdmin dans mon token 
- const  isRevoked = async ( req ,payload , done) => { 
-    //  si luser n'es pas admin 
-     if(!payload.isAdmin) {
-        done(null , true)
-     } 
-     
-     else {
-         done() ;
-     }
- }
+
  
     return jwt({
         secret ,
@@ -55,6 +45,19 @@ const Auth = () => {
         ]
     })
 
-}  
+}   
+// req = la demande , payload = contient ce qui se trouve à l'interieur du jeton exple : le champ isAdmin dans mon token 
+const  isRevoked = async ( req ,payload , done) => { 
+    //  si luser n'es pas admin 
+     if(!payload.isAdmin) {
+        done(null , true)
+     } 
+     
+     else {
+         done() ;
+     }
+ } 
+
+ 
 
 export default Auth ;

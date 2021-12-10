@@ -8,5 +8,8 @@ routerCategory.post("/categories",addCategory )
 routerCategory.delete("/categories/:idcat",deleteCategory)  ;
 routerCategory.get("/categories" ,getAllCategory )
 routerCategory.get("/categories/:idcat" ,getCategoryById) ;
-routerCategory.put("/categories/:idcat" , updateCategoryById)
-export default routerCategory  ; 
+routerCategory.put("/categories/:idcat" , updateCategoryById) 
+
+
+
+export default routerCategory  ;

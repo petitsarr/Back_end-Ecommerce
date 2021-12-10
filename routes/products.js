@@ -1,4 +1,4 @@
-import express from "express" 
+import express from "express" ;
 import { addNewProduct , getProductsFeatures ,getProductCount , updateProductById ,getAllProduct , deleteProductById , getProductById} from "../controllers/product" 
 
  const routerProduct = express.Router() ;
@@ -11,6 +11,8 @@ import { addNewProduct , getProductsFeatures ,getProductCount , updateProductByI
  routerProduct.get("/products/:idpro" , getProductById) 
  routerProduct.put("/products/:idpro",updateProductById)
  routerProduct.delete("/products/:idpro", deleteProductById )
+
+
 
 
  export default routerProduct ;

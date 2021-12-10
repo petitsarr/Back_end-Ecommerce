@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema({
         default : 0 
     } , 
     // pour la collection category 
-    // l'id sera connecté au categorie Schema .
+    // l'id sera connecté au categorie Schema....
     category : {
       type : mongoose.Schema.Types.ObjectId ,
     //   ceci est référencé au Schema que jai créé 

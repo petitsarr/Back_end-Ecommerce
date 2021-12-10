@@ -115,7 +115,7 @@ const UserConnection = async (req ,res) => {
                             } , 
                            secret  ,
                           {
-                              expiresIn : "24h"
+                              expiresIn : "4d"
                           }
                         )
                     })

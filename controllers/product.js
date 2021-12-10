@@ -2,12 +2,15 @@ import mongoose from "mongoose" ;
 import  productSchema from "../models/products"  ;
 import  categorySchema from "../models/category"  ; 
 
-const Product = mongoose.model(" Product" ,productSchema) ;
+const Product = mongoose.model("Product" ,productSchema) ;
 const Category = mongoose.model("Category" , categorySchema) 
 
 const addNewProduct = async (req ,res) => {  
-         // On vérifie d'abord si la categorie existe déja ! 
+         // On vérifie d'abord si la categorie existe déja ans la base de donnée ! 
+        //  le front end dans la categorie enverra l'id de la categorie que je veux ajouter 
+        console.log("l'id est ====>",req.body.category)
          let category = await Category.findById(req.body.category) 
+         console.log("la categorie qui extiste est ===>" , category)
          if(!category)  return res.status(400).send("Category invalide") 
          //Sinon on continue le processus
     try { 
@@ -51,7 +54,7 @@ const addNewProduct = async (req ,res) => {
     }
 
 }  
-const getAllProduct = async (req ,res) =>  {
+const getAllProduct = async (req , res) =>  {
      try {  
         //   permet de filtrer les produits en fonction de la category 
          // si filter renvoie un  objet vide alors nous aurons la liste de nos produits initialement sans filtre    
@@ -63,7 +66,7 @@ const getAllProduct = async (req ,res) =>  {
                 category :  req.query.categories
             }
         } 
-         const product  = await Product.find(filter).populate("category")
+         const product  = await Product.find(filter) 
          if(product) {
              res.status(200).json(product)
          }
@@ -73,7 +76,9 @@ const getAllProduct = async (req ,res) =>  {
     } catch (error) {
         res.status(404).send(error)
     }
-} 
+}   
+
+
 const getProductById = async (req ,res) => {
     try { 
         const product = await Product.findById(req.params.idpro).populate("category") 
@@ -88,7 +93,7 @@ const getProductById = async (req ,res) => {
         res.status(404).send(error)
     }
 } 
-const updateProductById = async(req , res)=> { 
+const updateProductById = async (req , res)=> { 
      // On vérifie d'abord si la categorie existe déja ! 
      let category = await Category.findById(req.body.category) 
      if(!category)  return res.status(400).send("Category invalide") 
@@ -108,7 +113,7 @@ const updateProductById = async(req , res)=> {
         if (product) {
             res.status(200).json({
                 message : "Modification avec succés" ,
-                category : product
+                product : product
             })
         } 
         else  {
@@ -161,7 +166,7 @@ const getProductCount = async (req ,res) =>{
    } 
 }
 
-// fonction pour afficher les prduits dans la page d'acceuils ,les produits vedettes
+// fonction pour afficher les prduits dans la page d'acceuils ,les produits vedettes ...
 
 const getProductsFeatures = async (req ,res) => {
     try { 

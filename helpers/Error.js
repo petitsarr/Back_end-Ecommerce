@@ -1,7 +1,7 @@
 
 
-const Error = (err , req ,res ,next) =>{  
-
+const Error = (err , req ,res ,next) =>{   
+    
     //  s'il ya erreur d'authentification
     if(err.name === "UnauthorizedError") {
         return res.status(401).json({

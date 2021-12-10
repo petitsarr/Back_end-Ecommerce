@@ -55,7 +55,8 @@ const getCategoryById = async (req ,res) => {
     } catch (error) {
         res.status(404).send(error)
     }
-} 
+}  
+
 // Modifié un category 
 const updateCategoryById = async ( req ,res) => { 
     try { 
