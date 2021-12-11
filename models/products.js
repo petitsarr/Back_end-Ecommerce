@@ -39,11 +39,11 @@ const productSchema = new mongoose.Schema({
      
     } ,
     // le nombre de produit qui sont Stockés .
-     countInStock  :{
+     countInStock:{
          type : Number , 
          required : true   ,
-         min : 0  ,
-         max : 255 
+        //  min : 0  ,
+        //  max : 255 
      }  , 
     //  pour l'evaluation ,la notation
      rating : {

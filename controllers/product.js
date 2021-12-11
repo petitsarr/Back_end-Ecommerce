@@ -5,6 +5,10 @@ import  categorySchema from "../models/category"  ;
 const Product = mongoose.model("Product" ,productSchema) ;
 const Category = mongoose.model("Category" , categorySchema) 
 
+
+// 
+     
+
 const addNewProduct = async (req ,res) => {  
          // On vérifie d'abord si la categorie existe déja ans la base de donnée ! 
         //  le front end dans la categorie enverra l'id de la categorie que je veux ajouter 
@@ -14,11 +18,11 @@ const addNewProduct = async (req ,res) => {
          if(!category)  return res.status(400).send("Category invalide") 
          //Sinon on continue le processus
     try { 
+
        const {
         name ,  
         description ,
         richDescription ,
-        image ,
         brand , 
         price ,
         category ,
@@ -26,30 +30,41 @@ const addNewProduct = async (req ,res) => {
         rating ,
         numReviews  ,
         isFeatured 
-       } = req.body
+       } = req.body   
+
+// On refuse la requete lorsqu'il n'a pas d'image ...
+       const file = req.file;
+       if (!file) return res.status(400).send("Pas d'image dans la requete");
+
+
+    const image =`${req.protocol}://${req.get('host')}/public/uploads/${req.file.filename}` 
+    console.log("le file est ==>" , req.file)
+    console.log("mon image est ==>" , image)
+
+    
        const product = new Product ( {
         name ,  
         description ,
         richDescription ,
-        image ,
-        brand , 
-        price ,
-        category ,
-        countInStock  ,
-        rating ,
-        numReviews  ,
-        isFeatured 
+          image ,
+         brand , 
+         price ,
+         category ,
+         countInStock   ,
+         rating ,
+         numReviews  ,
+         isFeatured 
        }) 
-       await product.save() ;
+       await product.save();
        if(product) {
            res.status(201).json(product)
        } 
        else {
            throw new Error("impossible d'jouter un produit ")
        }
-
         
     } catch (error) {
+        console.log(error)
         res.status(400).send(error)
     }
 
