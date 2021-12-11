@@ -9,7 +9,7 @@ import mesuploads from  "../middleware/multer.config"
  routerProduct.get("/products/count" , getProductCount) 
  routerProduct.get("/products/features/:count" , getProductsFeatures)   
  routerProduct.get("/products/:idpro" , getProductById) 
- routerProduct.put("/products/:idpro",updateProductById)
+ routerProduct.put("/products/:idpro",mesuploads.single(' image'),updateProductById)
  routerProduct.delete("/products/:idpro", deleteProductById )
 
 

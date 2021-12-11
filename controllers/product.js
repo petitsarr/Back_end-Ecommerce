@@ -114,11 +114,22 @@ const updateProductById = async (req , res)=> {
      if(!category)  return res.status(400).send("Category invalide") 
      //Sinon on continue le processus  
      try { 
+    //  Pour la modification on teste si l'admin a modifié l'image ou à garder l'ancien image .
+        const mybody = req.file ? 
+        {
+            ...req.body ,
+            image : `${req.protocol}://${req.get('host')}/public/uploads/${req.file.filename}`
+        } 
+          : 
+          {
+              ...req.body
+          }
+
         const product = await Product.findByIdAndUpdate(
             
             req.params.idpro ,  
               
-            req.body ,  
+            mybody ,  
             // ceci veut dire que je retourne les nouvelles datas mis a jour .
             {
                 new : true 
