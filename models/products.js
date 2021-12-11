@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema({
         default : " "
     } , 
     //Qui sera un tableau de String 
-    images : [{
+    images:[{
         type : String
     }]  ,
     brand : {

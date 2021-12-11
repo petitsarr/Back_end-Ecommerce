@@ -138,7 +138,7 @@ const updateProductById = async (req , res)=> {
         ) 
         if (product) {
             res.status(200).json({
-                message : "Modification avec succés" ,
+                message : "Modification  avec succés" ,
                 product : product
             })
         } 
@@ -210,10 +210,51 @@ const getProductsFeatures = async (req ,res) => {
      
        res.status(404).send(error)
    } 
+} 
+
+//Cette fonction permet de mettre à jour mon tableau d'images. 
+
+const updateGalerie = async(req ,res) => {
+     try { 
+        const files = req.files;
+        console.log("my files sont ==>" , files)
+        let imagesPaths = [];
+        const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+
+        if (files) {
+            files.map((file) => {
+                imagesPaths.push(`${basePath}${file.filename}`);
+            });
+        }
+
+        const product = await Product.findByIdAndUpdate(
+            req.params.idpro,
+            {
+                images: imagesPaths,
+            },
+            { new: true }
+        );
+
+        
+        if (product) {
+            res.status(200).json({
+                message : "Modification images avec succés" ,
+                product : product
+            })
+        } 
+        else  {
+            throw new Error("Echec Modification ")
+        }
+        
+    } catch (error) { 
+        console.log(error)
+        res.status(400).send(error)
+    }
+
 }
 
     
 
 
 
-export { addNewProduct , getAllProduct  ,  getProductsFeatures  , updateProductById , getProductById ,deleteProductById ,getProductCount } 
+export { addNewProduct ,updateGalerie , getAllProduct  ,  getProductsFeatures  , updateProductById , getProductById ,deleteProductById ,getProductCount } 

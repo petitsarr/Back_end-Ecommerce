@@ -1,5 +1,5 @@
 import express from "express" ;
-import { addNewProduct , getProductsFeatures ,getProductCount , updateProductById ,getAllProduct , deleteProductById , getProductById} from "../controllers/product" 
+import { addNewProduct ,updateGalerie , getProductsFeatures ,getProductCount , updateProductById ,getAllProduct , deleteProductById , getProductById} from "../controllers/product" 
 import mesuploads from  "../middleware/multer.config"
  const routerProduct = express.Router() ;
 
@@ -10,6 +10,7 @@ import mesuploads from  "../middleware/multer.config"
  routerProduct.get("/products/features/:count" , getProductsFeatures)   
  routerProduct.get("/products/:idpro" , getProductById) 
  routerProduct.put("/products/:idpro",mesuploads.single(' image'),updateProductById)
+ routerProduct.put("/products/galery/:idpro",mesuploads.array(' images  ', 10 ),updateGalerie)
  routerProduct.delete("/products/:idpro", deleteProductById )
 
 
