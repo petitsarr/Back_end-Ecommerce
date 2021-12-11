@@ -28,7 +28,10 @@ const Auth = () => {
         isRevoked  : isRevoked
     }).unless({
         path : [ 
+            // Authorise de voir mes fichiers images 
+            {url: /\/public\/uploads(.*)/ , methods: ['GET', 'OPTIONS'] },
         {
+            
             // ceci veut dire que je peux acceder à mes produits sans authentification 
             // avec cette expression irreguliere qui veut dire tout mes routes ou nous avons products/klk chose 
             url : /\/api\/v1\/products(.*)/, methods : ["GET" , "OPTIONS"]

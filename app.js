@@ -6,6 +6,7 @@ import routerCategory  from "./routes/category"  ;
 import routerProduct from "./routes/products" ;
 import  userRouter from "./routes/user"  
 import  routerOrders from "./routes/orders" 
+import path from "path" 
 
 import Auth from "./helpers/jwt"
 import cors from "cors" 
@@ -26,7 +27,8 @@ app.use(express.json())
 app.use(express.urlencoded({
     extended:true
 }))  
-
+//Définir mes fichiers téléchargés de maniére statique ...
+app.use('/public/uploads', express.static(__dirname + '/public/uploads')); 
 //morgan pour enrigistrer les requétes http pour node js (utilisation d'une chaine de format prédéfinie)
 app.use(morgan('tiny')) 
 
